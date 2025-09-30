@@ -1,0 +1,33 @@
+# Ambiente Virtual
+/venv/
+__pycache__/
+
+# Arquivos de Banco de Dados
+*.sqlite3
+db.sqlite3
+
+# Arquivos de Configuração e Segredos
+.env
+*.env
+*.local
+
+# Arquivos de IDEs e Editores
+.idea/
+.vscode/
+
+# Arquivos de Cache e Logs
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Arquivos do Django
+*.pyc
+
+# Arquivos Estáticos e de Mídia (se gerados localmente)
+/static/
+/media/
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db

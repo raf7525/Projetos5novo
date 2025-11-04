@@ -57,3 +57,14 @@ Faça o Commit das suas alterações (git commit -m 'Adiciona nova feature').
 Faça o Push para a sua Branch (git push origin feature/sua-feature).
 
 Abra um Pull Request.
+
+"MATRIZ DE CONFUSÃO"
+Uma matriz de confusão é uma tabela que compara os resultados previstos por um modelo de classificação com os resultados reais para avaliar seu desempenho. Ela é especialmente útil para modelos com duas ou mais categorias e pode ser usada para calcular métricas como precisão, recall e acurácia. 
+
+
+A matriz é composta por quatro componentes principais (para classificação binária):
+
+Verdadeiros Positivos (VP): O modelo previu corretamente a classe positiva. 
+Verdadeiros Negativos (VN): O modelo previu corretamente a classe negativa. 
+Falsos Positivos (FP): O modelo previu a classe positiva, mas a realidade era negativa (erro do tipo I). 
+Falsos Negativos (FN): O modelo previu a classe negativa, mas a realidade era positiva (erro do tipo II). 

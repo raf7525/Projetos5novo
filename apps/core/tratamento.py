@@ -41,7 +41,7 @@ def main():
         # Limpeza de dados (exemplo)
         print("\n=== LIMPEZA DE DADOS ===")
         cleaner = DataCleaner()
-        df_clean = cleaner.standardize_columns(df)
+        df_clean = cleaner.padroniza_colunas(df)
         df_clean = cleaner.remove_duplicates(df_clean)
         print("Dados limpos!")
         

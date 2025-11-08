@@ -1,33 +1,111 @@
-# Ambiente Virtual
-/venv/
+# Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[cod]
+*$py.class
+
+# Ambientes Virtuais
+/venv/
+/venv_backup_python3.10/
+env/
+ENV/
+.venv
+venv.bak/
+env.bak/
 
 # Arquivos de Banco de Dados
 *.sqlite3
 db.sqlite3
+db.sqlite3-journal
 
 # Arquivos de Configuração e Segredos
 .env
 *.env
 *.local
+local_settings.py
 
 # Arquivos de IDEs e Editores
 .idea/
 .vscode/
+.spyderproject
+.spyproject
+.ropeproject
 
 # Arquivos de Cache e Logs
 .pytest_cache/
 .coverage
+.coverage.*
 htmlcov/
+.cache
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
 *.log
+logs/
 
 # Arquivos do Django
 *.pyc
+*.pyo
+*.mo
+*.pot
 
 # Arquivos Estáticos e de Mídia (se gerados localmente)
 /static/
+/staticfiles/
 /media/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+profile_default/
+ipython_config.py
+
+# Arquivos de distribuição / empacotamento
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
 # Arquivos do sistema operacional
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+
+# Arquivos temporários
+*.tmp
+*.temp
+data/temp/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/

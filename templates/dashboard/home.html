@@ -1,0 +1,348 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Dashboard Principal - Sistema Waze Alagamentos{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Filtros -->
+    <div class="col-12 mb-4">
+        <div class="card filter-card">
+            <div class="card-body">
+                <h5 class="card-title text-white">
+                    <i class="fas fa-filter"></i> Filtros de Análise
+                </h5>
+                <form method="GET" class="row g-3">
+                    <div class="col-md-4">
+                        <label for="periodo" class="form-label text-white">Período:</label>
+                        <select name="periodo" id="periodo" class="form-select">
+                            <option value="1" {% if filtros_aplicados.periodo == "1" %}selected{% endif %}>Últimas 24h</option>
+                            <option value="7" {% if filtros_aplicados.periodo == "7" %}selected{% endif %}>Últimos 7 dias</option>
+                            <option value="30" {% if filtros_aplicados.periodo == "30" %}selected{% endif %}>Últimos 30 dias</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="bairro" class="form-label text-white">Bairro:</label>
+                        <select name="bairro" id="bairro" class="form-select">
+                            <option value="all">Todos os bairros</option>
+                            {% for bairro in opcoes_filtros.bairros %}
+                                <option value="{{ bairro.nome }}" 
+                                    {% if filtros_aplicados.bairro == bairro.nome %}selected{% endif %}>
+                                    {{ bairro.nome }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="severidade" class="form-label text-white">Severidade:</label>
+                        <select name="severidade" id="severidade" class="form-select">
+                            <option value="all">Todas</option>
+                            {% for sev in opcoes_filtros.severidades %}
+                                <option value="{{ sev.value }}" 
+                                    {% if filtros_aplicados.severidade == sev.value|stringformat:"s" %}selected{% endif %}>
+                                    {{ sev.label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-light">
+                            <i class="fas fa-search"></i> Aplicar Filtros
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Métricas Principais -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card metric-card h-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h6 class="card-title text-muted">Total de Relatórios</h6>
+                        <h3 class="text-primary">{{ metricas.total_relatos }}</h3>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-chart-bar fa-2x text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card metric-card h-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h6 class="card-title text-muted">Casos Críticos</h6>
+                        <h3 class="text-danger">{{ metricas.relatos_criticos }}</h3>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-exclamation-triangle fa-2x text-danger"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card metric-card h-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h6 class="card-title text-muted">Usuários Ativos</h6>
+                        <h3 class="text-success">{{ metricas.usuarios_ativos }}</h3>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="card metric-card h-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h6 class="card-title text-muted">Severidade Média</h6>
+                        <h3 class="text-warning">{{ metricas.severidade_media|floatformat:1 }}</h3>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-thermometer-half fa-2x text-warning"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gráficos e Visualizações -->
+<div class="row mb-4">
+    <!-- Gráfico de Relatórios por Hora -->
+    <div class="col-lg-8 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-clock text-primary"></i>
+                    Relatórios por Hora (Últimas 24h)
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="chartRelatoriosPorHora"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Distribuição de Severidade -->
+    <div class="col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-pie-chart text-primary"></i>
+                    Distribuição por Severidade
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="chartSeveridade"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <!-- Ranking de Bairros -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-trophy text-primary"></i>
+                    Bairros Mais Afetados
+                </h5>
+            </div>
+            <div class="card-body">
+                {% for bairro in bairros_ranking %}
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <strong>{{ bairro.bairro__nome }}</strong>
+                            <br>
+                            <small class="text-muted">
+                                Severidade média: {{ bairro.severidade_media|floatformat:1 }}
+                            </small>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-primary fs-6">
+                                {{ bairro.total_relatos }} relatos
+                            </span>
+                        </div>
+                    </div>
+                    {% if not forloop.last %}<hr>{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Relatórios Recentes -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-history text-primary"></i>
+                    Relatórios Recentes
+                    <span class="badge bg-secondary ms-2">Atualizado: <span class="timestamp-update"></span></span>
+                </h5>
+            </div>
+            <div class="card-body">
+                {% for relato in relatos_recentes %}
+                    <div class="timeline-item">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <strong class="severity-{{ relato.nivel_severidade }}">
+                                    {{ relato.bairro.nome }}
+                                </strong>
+                                <br>
+                                <small class="text-muted">
+                                    {{ relato.timestamp|timesince }} atrás
+                                    {% if relato.total_confirmacoes > 0 %}
+                                        • {{ relato.total_confirmacoes }} confirmações
+                                    {% endif %}
+                                </small>
+                                {% if relato.descricao %}
+                                    <p class="mb-1 text-secondary">{{ relato.descricao|truncatechars:60 }}</p>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <span class="badge bg-severity-{{ relato.nivel_severidade }}">
+                                    Nível {{ relato.nivel_severidade }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mapa de Calor -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-map-marked-alt text-primary"></i>
+                    Mapa de Alagamentos
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="map" class="map-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Dados do Django
+    const relatosPorHora = {{ relatos_por_hora|safe }};
+    const severidadeDistribuicao = {{ severidade_distribuicao|safe }};
+    const dadosMapa = {{ dados_mapa|safe }};
+    
+    // Gráfico de Relatórios por Hora
+    const ctxHora = document.getElementById('chartRelatoriosPorHora').getContext('2d');
+    new Chart(ctxHora, {
+        type: 'line',
+        data: {
+            labels: relatosPorHora.map(item => item.hora),
+            datasets: [{
+                label: 'Relatórios',
+                data: relatosPorHora.map(item => item.total),
+                borderColor: '#3498db',
+                backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                tension: 0.1,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    
+    // Gráfico de Distribuição de Severidade
+    const ctxSeveridade = document.getElementById('chartSeveridade').getContext('2d');
+    const severidadeCores = ['#27ae60', '#17a2b8', '#f39c12', '#e74c3c'];
+    const severidadeLabels = ['Baixo', 'Moderado', 'Alto', 'Crítico'];
+    
+    new Chart(ctxSeveridade, {
+        type: 'doughnut',
+        data: {
+            labels: severidadeLabels,
+            datasets: [{
+                data: [1, 2, 3, 4].map(nivel => {
+                    const item = severidadeDistribuicao.find(s => s.nivel_severidade === nivel);
+                    return item ? item.total : 0;
+                }),
+                backgroundColor: severidadeCores
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+    
+    // Mapa
+    const map = L.map('map').setView([-8.05, -34.9], 12);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+    
+    // Adicionar marcadores
+    dadosMapa.forEach(relato => {
+        const severidadeCor = ['#27ae60', '#17a2b8', '#f39c12', '#e74c3c'][relato.nivel_severidade - 1];
+        
+        L.circleMarker([relato.latitude, relato.longitude], {
+            color: severidadeCor,
+            fillColor: severidadeCor,
+            fillOpacity: 0.6,
+            radius: 5 + relato.nivel_severidade * 2
+        }).addTo(map).bindPopup(`
+            <strong>${relato.bairro__nome}</strong><br>
+            Severidade: ${relato.nivel_severidade}<br>
+            ${relato.timestamp}
+        `);
+    });
+    
+    // Auto-refresh a cada 5 minutos
+    setInterval(() => {
+        location.reload();
+    }, 300000);
+</script>
+{% endblock %}

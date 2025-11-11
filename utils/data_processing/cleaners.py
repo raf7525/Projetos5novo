@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import MinMaxScaler
 
 class DataCleaner:
     """ESSE ARQUIVO SERVE PARA LIMPEZA DE DADOS ELE TIRA OUTLIERS E DUPLICATAS"""
@@ -34,3 +35,13 @@ class DataCleaner:
         return df[(df[column] >= limite_inferior) & (df[column] <= limite_maximo)]
     """"Como o iqr funciona, ele define dois limites e todos os valores que estejam
     fora desses limites são considerados outliers e removidos do DataFrame."""
+
+
+    #normaliza os dados com MinMax
+    def normalizando_dados(df,colunas_numericas =None):
+     if colunas_numericas is None:
+          colunas_numericas = ['velocity', 'direction', 'temperature', 'humidity']##alterar diante das colunas quando tivermos os dados
+          scaler = MinMaxScaler()
+          df_normalizado = df.copy()
+          df_normalizado[colunas_numericas] = scaler.fit_transform(df[colunas_numericas])
+          return df_normalizado, scaler

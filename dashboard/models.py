@@ -12,9 +12,13 @@ from django.utils import timezone
 import uuid
 
 class Bairro(models.Model):
-    """Modelo para bairros de Recife"""
-    nome = models.CharField(max_length=100, unique=True)
+    """Modelo para bairros - expandido para múltiplas cidades"""
+    nome = models.CharField(max_length=100)
+    cidade = models.CharField(max_length=100, default='Recife')  # Nova coluna
+    uf = models.CharField(max_length=2, default='PE')  # Nova coluna
     zona = models.CharField(max_length=50, blank=True)  # Norte, Sul, Centro, etc.
+    latitude = models.FloatField(null=True, blank=True)  # Coordenadas
+    longitude = models.FloatField(null=True, blank=True)  # Coordenadas
     populacao = models.IntegerField(null=True, blank=True)
     area_km2 = models.FloatField(null=True, blank=True)
     risco_base = models.IntegerField(
@@ -27,6 +31,7 @@ class Bairro(models.Model):
         db_table = 'bairros'
         verbose_name = 'Bairro'
         verbose_name_plural = 'Bairros'
+        unique_together = ('nome', 'cidade', 'uf')  # Bairro único por cidade
     
     def __str__(self):
         return self.nome

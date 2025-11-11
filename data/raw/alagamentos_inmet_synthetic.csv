@@ -1,0 +1,151 @@
+data,cidade,uf,bairro,latitude,longitude,severidade,confirmacoes,usuario,descricao,precipitacao_mm,categoria_chuva
+2025-08-11 17:30:00,São Paulo,SP,Itaim,-23.55815,-46.673258,2,3,user_2685,Trânsito lento por água - Precipitação: 15.2mm,15.2,moderada
+2025-06-22 21:45:00,Cuiabá,MT,Goiabeiras,-15.595049,-56.113611,4,2,user_9666,Alagamento crítico - Precipitação: 20.0mm,20.0,forte
+2025-06-28 14:45:00,Campo Grande,MS,Coophavila II,-20.437153,-54.621517,1,4,user_4556,Água acumulada em bueiro - Precipitação: 3.6mm,3.6,leve
+2025-06-20 16:00:00,Belo Horizonte,MG,Savassi,-19.942917,-44.036807,1,2,user_7235,Leve alagamento na calçada - Precipitação: 0.9mm,0.9,sem_chuva
+2025-08-19 16:45:00,Goiânia,GO,Vila Nova,-16.677658,-49.245986,3,2,user_4843,Carros com dificuldade - Precipitação: 8.4mm,8.4,moderada
+2025-06-23 03:15:00,São Paulo,SP,Mooca,-23.640955,-46.674934,4,10,user_8916,Situação perigosa - Precipitação: 38.8mm,38.8,forte
+2025-07-21 15:45:00,Salvador,BA,Liberdade,-13.05509,-38.412623,1,1,user_3027,Poça d'água na rua - Precipitação: 3.0mm,3.0,leve
+2025-09-13 00:30:00,Salvador,BA,Barra,-12.998307,-38.586826,2,1,user_9392,Trânsito lento por água - Precipitação: 6.0mm,6.0,leve
+2025-07-11 14:00:00,Campo Grande,MS,Coophavila II,-20.412489,-54.562557,1,3,user_9110,Poça d'água na rua - Precipitação: 0.3mm,0.3,sem_chuva
+2025-09-08 17:15:00,Goiânia,GO,Vila Nova,-16.718422,-49.343714,1,1,user_8408,Água acumulada em bueiro - Precipitação: 2.8mm,2.8,leve
+2025-06-21 15:45:00,Salvador,BA,Itapuã,-12.881429,-38.490227,3,4,user_4157,Água até o joelho - Precipitação: 25.0mm,25.0,forte
+2025-05-28 20:00:00,Cuiabá,MT,Coxipó,-15.521488,-56.092132,1,2,user_6592,Leve alagamento na calçada - Precipitação: 1.7mm,1.7,leve
+2025-09-06 10:15:00,São Paulo,SP,Itaim,-23.566518,-46.695578,1,1,user_1663,Água acumulada em bueiro - Precipitação: 0.4mm,0.4,sem_chuva
+2025-06-28 13:45:00,Cuiabá,MT,Coxipó,-15.649644,-56.10055,2,1,user_2636,Alagamento moderado na via - Precipitação: 12.8mm,12.8,moderada
+2025-08-21 23:30:00,Recife,PE,Boa Viagem,-8.02313,-34.843859,2,4,user_2707,Alagamento moderado na via - Precipitação: 14.0mm,14.0,moderada
+2025-10-07 15:30:00,Recife,PE,Varzea,-8.023539,-34.853294,2,6,user_7287,Trânsito lento por água - Precipitação: 17.1mm,17.1,moderada
+2025-08-05 08:30:00,Cuiabá,MT,Jardim Europa,-15.55777,-56.0381,1,1,user_2843,Água acumulada em bueiro - Precipitação: 1.3mm,1.3,leve
+2025-10-08 14:30:00,Goiânia,GO,Setor Oeste,-16.688412,-49.218003,3,2,user_9815,Carros com dificuldade - Precipitação: 22.8mm,22.8,forte
+2025-06-29 11:00:00,Recife,PE,Graças,-8.112259,-34.924226,1,3,user_3255,Água acumulada em bueiro - Precipitação: 0.9mm,0.9,sem_chuva
+2025-09-08 18:15:00,Belo Horizonte,MG,Pampulha,-19.903863,-43.965543,3,7,user_1098,Alagamento significativo - Precipitação: 32.8mm,32.8,forte
+2025-09-30 00:45:00,Brasília,DF,Lago Sul,-15.737564,-47.97255,1,3,user_5911,Poça d'água na rua - Precipitação: 4.4mm,4.4,leve
+2025-09-25 13:45:00,Campo Grande,MS,Aero Rancho,-20.412733,-54.689908,4,7,user_4436,Carros ilhados - Precipitação: 33.2mm,33.2,forte
+2025-06-20 19:30:00,Salvador,BA,Itapuã,-12.92551,-38.553846,3,1,user_8679,Água até o joelho - Precipitação: 12.2mm,12.2,moderada
+2025-05-17 23:15:00,Cuiabá,MT,Centro,-15.509386,-56.13385,4,11,user_1606,Carros ilhados - Precipitação: 58.3mm,58.3,extrema
+2025-08-07 22:45:00,Recife,PE,Espinheiro,-8.03864,-34.792769,2,1,user_6442,Água cobrindo meio-fio - Precipitação: 3.7mm,3.7,leve
+2025-08-12 06:15:00,Goiânia,GO,Setor Oeste,-16.67549,-49.180266,2,3,user_8343,Alagamento moderado na via - Precipitação: 19.9mm,19.9,moderada
+2025-06-08 12:30:00,Goiânia,GO,Centro,-16.614421,-49.311145,3,3,user_5495,Carros com dificuldade - Precipitação: 11.1mm,11.1,moderada
+2025-09-19 19:30:00,Campo Grande,MS,Centro,-20.508992,-54.543632,1,4,user_7457,Leve alagamento na calçada - Precipitação: 0.6mm,0.6,sem_chuva
+2025-06-27 03:45:00,Cuiabá,MT,Centro,-15.595551,-56.046001,1,1,user_6222,Poça d'água na rua - Precipitação: 0.3mm,0.3,sem_chuva
+2025-05-06 05:45:00,Goiânia,GO,Vila Nova,-16.597081,-49.341786,2,5,user_6177,Trânsito lento por água - Precipitação: 16.4mm,16.4,moderada
+2025-07-29 02:00:00,Salvador,BA,Pelourinho,-13.035341,-38.578713,1,2,user_8805,Leve alagamento na calçada - Precipitação: 0.4mm,0.4,sem_chuva
+2025-08-26 17:45:00,Belo Horizonte,MG,Barreiro,-19.93608,-43.990454,4,8,user_4506,Situação perigosa - Precipitação: 32.8mm,32.8,forte
+2025-07-25 01:15:00,Belo Horizonte,MG,Pampulha,-19.984934,-44.036568,1,4,user_3479,Leve alagamento na calçada - Precipitação: 0.1mm,0.1,sem_chuva
+2025-07-24 15:00:00,Salvador,BA,Itapuã,-13.060939,-38.535077,2,6,user_3489,Água cobrindo meio-fio - Precipitação: 15.8mm,15.8,moderada
+2025-08-04 18:00:00,Brasília,DF,Lago Sul,-15.762845,-47.831954,3,2,user_3427,Carros com dificuldade - Precipitação: 15.4mm,15.4,moderada
+2025-06-02 14:30:00,Campo Grande,MS,Coophavila II,-20.485208,-54.697082,4,5,user_9945,Carros ilhados - Precipitação: 32.5mm,32.5,forte
+2025-06-04 13:15:00,Campo Grande,MS,Centro,-20.440793,-54.601422,1,1,user_1412,Leve alagamento na calçada - Precipitação: 6.9mm,6.9,leve
+2025-08-28 17:00:00,Brasília,DF,Lago Norte,-15.681899,-47.937476,4,12,user_6104,Carros ilhados - Precipitação: 51.0mm,51.0,extrema
+2025-08-04 13:15:00,Campo Grande,MS,Centro,-20.464454,-54.633135,3,1,user_2365,Alagamento significativo - Precipitação: 10.9mm,10.9,moderada
+2025-09-18 19:00:00,Cuiabá,MT,Centro,-15.636137,-56.009988,1,1,user_6486,Água acumulada em bueiro - Precipitação: 1.0mm,1.0,sem_chuva
+2025-09-21 14:30:00,São Paulo,SP,Centro,-23.627307,-46.553814,2,4,user_7541,Água cobrindo meio-fio - Precipitação: 14.6mm,14.6,moderada
+2025-08-30 14:30:00,Goiânia,GO,Setor Oeste,-16.616356,-49.329775,3,1,user_6293,Água até o joelho - Precipitação: 16.5mm,16.5,moderada
+2025-09-18 10:00:00,Belo Horizonte,MG,Funcionários,-19.903739,-43.867372,3,8,user_9691,Carros com dificuldade - Precipitação: 34.1mm,34.1,forte
+2025-09-22 20:00:00,Salvador,BA,Itapuã,-12.958319,-38.525156,3,2,user_5268,Carros com dificuldade - Precipitação: 12.2mm,12.2,moderada
+2025-09-18 14:15:00,São Paulo,SP,Centro,-23.501158,-46.603792,1,3,user_1504,Leve alagamento na calçada - Precipitação: 0.1mm,0.1,sem_chuva
+2025-08-21 06:00:00,Salvador,BA,Liberdade,-13.06132,-38.425071,1,3,user_7190,Poça d'água na rua - Precipitação: 7.7mm,7.7,leve
+2025-06-18 16:30:00,Recife,PE,Boa Viagem,-7.966949,-34.78826,4,10,user_6063,Situação perigosa - Precipitação: 53.9mm,53.9,extrema
+2025-08-10 14:45:00,Cuiabá,MT,Goiabeiras,-15.646812,-56.127931,1,1,user_8102,Água acumulada em bueiro - Precipitação: 2.2mm,2.2,leve
+2025-09-22 12:00:00,Campo Grande,MS,Centro,-20.351894,-54.656672,3,9,user_2838,Alagamento significativo - Precipitação: 33.7mm,33.7,forte
+2025-09-30 14:45:00,Belo Horizonte,MG,Centro,-19.923926,-43.842943,3,4,user_8449,Água até o joelho - Precipitação: 31.0mm,31.0,forte
+2025-07-02 14:30:00,São Paulo,SP,Centro,-23.647266,-46.724928,3,7,user_6989,Alagamento significativo - Precipitação: 36.8mm,36.8,forte
+2025-05-03 15:00:00,Belo Horizonte,MG,Centro,-19.994168,-43.84919,2,5,user_8939,Alagamento moderado na via - Precipitação: 17.1mm,17.1,moderada
+2025-08-21 17:15:00,Belo Horizonte,MG,Funcionários,-19.915967,-43.869564,1,1,user_9427,Leve alagamento na calçada - Precipitação: 1.8mm,1.8,leve
+2025-09-10 07:30:00,Salvador,BA,Barra,-12.908991,-38.42937,2,3,user_7949,Água cobrindo meio-fio - Precipitação: 9.6mm,9.6,moderada
+2025-06-19 16:15:00,Belo Horizonte,MG,Centro,-19.863269,-43.960691,3,1,user_4177,Água até o joelho - Precipitação: 9.1mm,9.1,moderada
+2025-06-20 16:00:00,Cuiabá,MT,Coxipó,-15.690828,-56.075839,1,2,user_5300,Leve alagamento na calçada - Precipitação: 7.5mm,7.5,leve
+2025-09-03 16:45:00,Belo Horizonte,MG,Pampulha,-19.983624,-43.970867,1,1,user_2887,Água acumulada em bueiro - Precipitação: 4.8mm,4.8,leve
+2025-10-02 16:15:00,Cuiabá,MT,Goiabeiras,-15.664598,-56.182259,3,1,user_7376,Alagamento significativo - Precipitação: 10.7mm,10.7,moderada
+2025-05-12 09:15:00,Brasília,DF,Asa Norte,-15.742443,-47.917669,1,1,user_3878,Água acumulada em bueiro - Precipitação: 3.3mm,3.3,leve
+2025-06-17 06:15:00,São Paulo,SP,Vila Madalena,-23.498009,-46.633747,4,5,user_1364,Carros ilhados - Precipitação: 21.7mm,21.7,forte
+2025-10-01 04:45:00,São Paulo,SP,Mooca,-23.628566,-46.650518,2,1,user_2906,Trânsito lento por água - Precipitação: 5.8mm,5.8,leve
+2025-05-15 07:30:00,Goiânia,GO,Vila Nova,-16.693357,-49.281415,1,4,user_8561,Poça d'água na rua - Precipitação: 1.1mm,1.1,leve
+2025-07-06 16:15:00,São Paulo,SP,Centro,-23.537108,-46.664245,1,1,user_3739,Poça d'água na rua - Precipitação: 0.5mm,0.5,sem_chuva
+2025-05-26 16:30:00,Salvador,BA,Liberdade,-13.039428,-38.560808,1,1,user_7986,Leve alagamento na calçada - Precipitação: 7.9mm,7.9,leve
+2025-07-01 18:45:00,Cuiabá,MT,Coxipó,-15.677592,-56.120429,4,6,user_9195,Situação perigosa - Precipitação: 21.6mm,21.6,forte
+2025-07-18 18:00:00,São Paulo,SP,Itaim,-23.535677,-46.684004,3,2,user_7469,Alagamento significativo - Precipitação: 16.7mm,16.7,moderada
+2025-10-01 13:30:00,Goiânia,GO,Campinas,-16.638779,-49.163597,1,1,user_3026,Poça d'água na rua - Precipitação: 6.2mm,6.2,leve
+2025-05-03 05:15:00,Salvador,BA,Barra,-13.052426,-38.582235,2,1,user_3832,Alagamento moderado na via - Precipitação: 14.6mm,14.6,moderada
+2025-05-09 16:45:00,Belo Horizonte,MG,Pampulha,-19.826995,-44.015141,2,5,user_6256,Trânsito lento por água - Precipitação: 17.5mm,17.5,moderada
+2025-10-09 09:30:00,Recife,PE,Graças,-7.990947,-34.939675,3,8,user_5820,Carros com dificuldade - Precipitação: 34.4mm,34.4,forte
+2025-10-12 18:30:00,Brasília,DF,Asa Sul,-15.71668,-47.932173,2,2,user_7943,Água cobrindo meio-fio - Precipitação: 18.9mm,18.9,moderada
+2025-10-26 16:00:00,São Paulo,SP,Vila Madalena,-23.541289,-46.558706,2,1,user_2970,Trânsito lento por água - Precipitação: 14.0mm,14.0,moderada
+2025-09-11 13:30:00,Brasília,DF,Lago Sul,-15.731708,-47.90537,2,3,user_2120,Alagamento moderado na via - Precipitação: 2.0mm,2.0,leve
+2025-10-02 17:15:00,Brasília,DF,Ceilândia,-15.715749,-47.997874,1,1,user_7359,Poça d'água na rua - Precipitação: 6.0mm,6.0,leve
+2025-10-27 14:00:00,Goiânia,GO,Jardim América,-16.61177,-49.21121,2,4,user_3116,Água cobrindo meio-fio - Precipitação: 13.8mm,13.8,moderada
+2025-09-25 09:15:00,Belo Horizonte,MG,Funcionários,-19.98933,-43.922754,1,1,user_1984,Leve alagamento na calçada - Precipitação: 2.6mm,2.6,leve
+2025-08-19 17:30:00,Recife,PE,Espinheiro,-7.995751,-34.905113,4,8,user_6109,Alagamento crítico - Precipitação: 31.3mm,31.3,forte
+2025-06-20 17:45:00,Salvador,BA,Barra,-12.90222,-38.585067,3,9,user_4072,Alagamento significativo - Precipitação: 38.2mm,38.2,forte
+2025-07-02 13:30:00,Goiânia,GO,Vila Nova,-16.582442,-49.229256,2,1,user_9766,Trânsito lento por água - Precipitação: 12.8mm,12.8,moderada
+2025-05-25 18:15:00,Recife,PE,Graças,-8.143431,-34.79745,2,1,user_2990,Água cobrindo meio-fio - Precipitação: 3.4mm,3.4,leve
+2025-10-27 14:45:00,Cuiabá,MT,Goiabeiras,-15.567293,-56.164393,1,1,user_1688,Poça d'água na rua - Precipitação: 6.5mm,6.5,leve
+2025-09-25 14:45:00,Belo Horizonte,MG,Funcionários,-19.978019,-43.860389,2,4,user_5524,Água cobrindo meio-fio - Precipitação: 10.2mm,10.2,moderada
+2025-05-30 18:30:00,Goiânia,GO,Vila Nova,-16.643782,-49.250598,1,1,user_5926,Água acumulada em bueiro - Precipitação: 0.8mm,0.8,sem_chuva
+2025-09-09 09:00:00,Goiânia,GO,Jardim América,-16.6112,-49.268253,1,1,user_1054,Água acumulada em bueiro - Precipitação: 0.8mm,0.8,sem_chuva
+2025-06-01 17:00:00,São Paulo,SP,Tatuapé,-23.53099,-46.672146,2,2,user_7722,Alagamento moderado na via - Precipitação: 14.6mm,14.6,moderada
+2025-06-20 16:30:00,Campo Grande,MS,Coophavila II,-20.460563,-54.606383,3,6,user_6005,Alagamento significativo - Precipitação: 17.7mm,17.7,moderada
+2025-06-24 19:30:00,Campo Grande,MS,Coophavila II,-20.411415,-54.599211,3,5,user_7852,Alagamento significativo - Precipitação: 16.8mm,16.8,moderada
+2025-09-25 13:30:00,Salvador,BA,Pelourinho,-12.982775,-38.551107,1,3,user_2387,Leve alagamento na calçada - Precipitação: 5.1mm,5.1,leve
+2025-05-24 07:15:00,Goiânia,GO,Jardim América,-16.637508,-49.201663,3,1,user_9428,Carros com dificuldade - Precipitação: 18.7mm,18.7,moderada
+2025-05-25 11:15:00,Salvador,BA,Barra,-13.015539,-38.606322,2,4,user_6475,Água cobrindo meio-fio - Precipitação: 13.1mm,13.1,moderada
+2025-06-10 12:00:00,Goiânia,GO,Campinas,-16.687263,-49.2967,3,4,user_5263,Água até o joelho - Precipitação: 14.0mm,14.0,moderada
+2025-08-06 16:00:00,Cuiabá,MT,Goiabeiras,-15.596216,-56.190607,3,4,user_2386,Carros com dificuldade - Precipitação: 14.9mm,14.9,moderada
+2025-06-20 07:30:00,Brasília,DF,Lago Norte,-15.820576,-47.906719,1,2,user_5150,Leve alagamento na calçada - Precipitação: 3.7mm,3.7,leve
+2025-08-19 21:15:00,Campo Grande,MS,Aero Rancho,-20.371694,-54.570718,2,3,user_7122,Trânsito lento por água - Precipitação: 10.6mm,10.6,moderada
+2025-10-01 15:00:00,Salvador,BA,Campo Grande,-12.950343,-38.518064,1,1,user_2252,Água acumulada em bueiro - Precipitação: 0.7mm,0.7,sem_chuva
+2025-08-16 16:15:00,Cuiabá,MT,Jardim Europa,-15.516537,-56.172636,1,3,user_4640,Leve alagamento na calçada - Precipitação: 0.1mm,0.1,sem_chuva
+2025-06-24 15:45:00,Brasília,DF,Taguatinga,-15.741545,-47.850161,3,5,user_7609,Alagamento significativo - Precipitação: 18.5mm,18.5,moderada
+2025-07-28 16:30:00,Recife,PE,Boa Viagem,-8.113885,-34.866411,4,10,user_1390,Carros ilhados - Precipitação: 58.9mm,58.9,extrema
+2025-05-14 07:30:00,Goiânia,GO,Vila Nova,-16.57109,-49.28618,2,3,user_1614,Água cobrindo meio-fio - Precipitação: 7.5mm,7.5,leve
+2025-05-17 16:45:00,Campo Grande,MS,Coophavila II,-20.451794,-54.659103,1,3,user_8694,Água acumulada em bueiro - Precipitação: 1.8mm,1.8,leve
+2025-08-28 15:00:00,Goiânia,GO,Vila Nova,-16.693408,-49.34512,2,5,user_1545,Água cobrindo meio-fio - Precipitação: 16.9mm,16.9,moderada
+2025-10-05 00:00:00,Cuiabá,MT,Centro,-15.546562,-56.119614,3,6,user_1271,Alagamento significativo - Precipitação: 19.3mm,19.3,moderada
+2025-08-29 17:00:00,Campo Grande,MS,Centro,-20.469076,-54.682552,2,1,user_5388,Água cobrindo meio-fio - Precipitação: 4.7mm,4.7,leve
+2025-09-30 12:00:00,Brasília,DF,Lago Sul,-15.836349,-47.830008,4,7,user_5805,Alagamento crítico - Precipitação: 48.6mm,48.6,extrema
+2025-06-08 19:15:00,Cuiabá,MT,Jardim Europa,-15.619684,-56.032435,3,4,user_4564,Carros com dificuldade - Precipitação: 18.8mm,18.8,moderada
+2025-08-18 10:15:00,Salvador,BA,Liberdade,-12.944044,-38.566735,2,4,user_2913,Alagamento moderado na via - Precipitação: 1.3mm,1.3,leve
+2025-06-30 11:30:00,Belo Horizonte,MG,Barreiro,-19.975236,-43.932605,3,6,user_5675,Alagamento significativo - Precipitação: 33.9mm,33.9,forte
+2025-09-19 18:30:00,Campo Grande,MS,Centro,-20.369561,-54.732916,3,3,user_1954,Água até o joelho - Precipitação: 25.3mm,25.3,forte
+2025-09-01 13:45:00,Cuiabá,MT,Coxipó,-15.563348,-56.184774,2,3,user_6233,Alagamento moderado na via - Precipitação: 8.6mm,8.6,moderada
+2025-06-09 19:15:00,Recife,PE,Graças,-7.977101,-34.833218,2,2,user_3383,Trânsito lento por água - Precipitação: 17.9mm,17.9,moderada
+2025-10-15 11:30:00,Salvador,BA,Barra,-13.048833,-38.470202,4,4,user_7150,Situação perigosa - Precipitação: 34.2mm,34.2,forte
+2025-09-10 19:15:00,Salvador,BA,Barra,-12.906407,-38.443573,2,3,user_1294,Alagamento moderado na via - Precipitação: 18.5mm,18.5,moderada
+2025-05-13 16:00:00,Campo Grande,MS,Coophavila II,-20.518604,-54.587794,2,3,user_6352,Água cobrindo meio-fio - Precipitação: 9.4mm,9.4,moderada
+2025-07-02 14:30:00,Goiânia,GO,Vila Nova,-16.679807,-49.208366,4,5,user_9073,Carros ilhados - Precipitação: 22.1mm,22.1,forte
+2025-08-26 13:15:00,Recife,PE,Varzea,-8.060808,-34.850485,1,4,user_6126,Poça d'água na rua - Precipitação: 0.9mm,0.9,sem_chuva
+2025-05-29 02:15:00,Goiânia,GO,Setor Oeste,-16.540575,-49.264764,1,1,user_1038,Poça d'água na rua - Precipitação: 6.7mm,6.7,leve
+2025-05-15 17:00:00,Belo Horizonte,MG,Funcionários,-19.965348,-43.849827,2,2,user_5116,Alagamento moderado na via - Precipitação: 6.9mm,6.9,leve
+2025-06-16 14:30:00,Campo Grande,MS,Aero Rancho,-20.458133,-54.56118,4,13,user_2980,Água muito alta - Precipitação: 55.2mm,55.2,extrema
+2025-10-10 03:00:00,Recife,PE,Imbiribeira,-8.112895,-34.806275,2,2,user_9711,Alagamento moderado na via - Precipitação: 14.8mm,14.8,moderada
+2025-07-18 14:15:00,Recife,PE,Imbiribeira,-7.956498,-34.942908,3,8,user_4224,Água até o joelho - Precipitação: 32.5mm,32.5,forte
+2025-05-17 16:45:00,Belo Horizonte,MG,Barreiro,-19.966201,-43.880488,2,5,user_4788,Trânsito lento por água - Precipitação: 10.4mm,10.4,moderada
+2025-07-11 14:15:00,Salvador,BA,Pelourinho,-12.897976,-38.45403,1,1,user_1213,Água acumulada em bueiro - Precipitação: 4.4mm,4.4,leve
+2025-10-26 07:00:00,Belo Horizonte,MG,Pampulha,-19.879507,-43.92807,1,4,user_9032,Leve alagamento na calçada - Precipitação: 5.0mm,5.0,leve
+2025-05-02 15:00:00,São Paulo,SP,Vila Madalena,-23.454507,-46.699828,1,4,user_4041,Leve alagamento na calçada - Precipitação: 1.2mm,1.2,leve
+2025-08-14 09:00:00,Belo Horizonte,MG,Centro,-19.832758,-44.029606,4,8,user_1552,Situação perigosa - Precipitação: 42.5mm,42.5,extrema
+2025-08-22 20:45:00,São Paulo,SP,Itaim,-23.471037,-46.630482,2,3,user_1021,Água cobrindo meio-fio - Precipitação: 17.6mm,17.6,moderada
+2025-10-01 15:30:00,Cuiabá,MT,Jardim Europa,-15.569941,-56.104144,2,6,user_4638,Trânsito lento por água - Precipitação: 16.8mm,16.8,moderada
+2025-08-08 17:00:00,Belo Horizonte,MG,Savassi,-19.889347,-43.973537,3,5,user_9946,Alagamento significativo - Precipitação: 33.2mm,33.2,forte
+2025-06-04 10:15:00,Brasília,DF,Ceilândia,-15.687844,-47.936819,1,2,user_4453,Poça d'água na rua - Precipitação: 0.3mm,0.3,sem_chuva
+2025-05-20 15:15:00,Goiânia,GO,Vila Nova,-16.565315,-49.16986,3,8,user_2394,Carros com dificuldade - Precipitação: 31.6mm,31.6,forte
+2025-09-02 10:00:00,Recife,PE,Imbiribeira,-7.968193,-34.944063,2,2,user_7477,Água cobrindo meio-fio - Precipitação: 18.0mm,18.0,moderada
+2025-05-02 09:00:00,Cuiabá,MT,Centro,-15.610939,-56.097037,1,4,user_4155,Poça d'água na rua - Precipitação: 0.4mm,0.4,sem_chuva
+2025-09-07 07:00:00,Salvador,BA,Pelourinho,-12.915305,-38.583825,1,3,user_8062,Poça d'água na rua - Precipitação: 7.8mm,7.8,leve
+2025-06-16 10:15:00,Salvador,BA,Barra,-12.936122,-38.580849,1,1,user_6895,Poça d'água na rua - Precipitação: 0.2mm,0.2,sem_chuva
+2025-10-18 21:00:00,São Paulo,SP,Tatuapé,-23.543298,-46.583642,1,3,user_2742,Água acumulada em bueiro - Precipitação: 2.2mm,2.2,leve
+2025-09-11 09:00:00,São Paulo,SP,Tatuapé,-23.462679,-46.732131,1,1,user_2058,Água acumulada em bueiro - Precipitação: 1.0mm,1.0,sem_chuva
+2025-06-28 13:00:00,Recife,PE,Graças,-8.149012,-34.789638,2,2,user_6342,Água cobrindo meio-fio - Precipitação: 16.3mm,16.3,moderada
+2025-10-18 15:45:00,Recife,PE,Espinheiro,-8.109629,-34.845314,2,2,user_9320,Água cobrindo meio-fio - Precipitação: 9.5mm,9.5,moderada
+2025-05-08 08:15:00,Campo Grande,MS,Tiradentes,-20.536497,-54.691171,4,3,user_4719,Carros ilhados - Precipitação: 23.5mm,23.5,forte
+2025-06-16 16:45:00,Campo Grande,MS,Aero Rancho,-20.408223,-54.661227,2,1,user_9125,Alagamento moderado na via - Precipitação: 6.6mm,6.6,leve
+2025-07-02 22:00:00,Salvador,BA,Pelourinho,-13.048178,-38.479898,4,13,user_2667,Carros ilhados - Precipitação: 55.0mm,55.0,extrema
+2025-08-10 14:15:00,Brasília,DF,Ceilândia,-15.771102,-48.018848,3,7,user_8232,Água até o joelho - Precipitação: 36.0mm,36.0,forte
+2025-07-15 16:30:00,Recife,PE,Boa Viagem,-8.061116,-34.977067,2,1,user_8010,Trânsito lento por água - Precipitação: 12.7mm,12.7,moderada
+2025-08-18 16:15:00,Belo Horizonte,MG,Pampulha,-20.014872,-43.97175,3,1,user_5399,Alagamento significativo - Precipitação: 12.6mm,12.6,moderada
+2025-06-06 11:45:00,Cuiabá,MT,Jardim Europa,-15.595753,-56.035521,3,2,user_5431,Água até o joelho - Precipitação: 17.2mm,17.2,moderada
+2025-06-16 06:30:00,Salvador,BA,Campo Grande,-13.049716,-38.512826,1,3,user_4610,Poça d'água na rua - Precipitação: 7.5mm,7.5,leve
+2025-10-04 18:30:00,Brasília,DF,Taguatinga,-15.79729,-47.995623,3,1,user_2286,Água até o joelho - Precipitação: 9.1mm,9.1,moderada
+2025-08-03 18:30:00,Salvador,BA,Barra,-12.88645,-38.525095,2,2,user_2798,Água cobrindo meio-fio - Precipitação: 16.5mm,16.5,moderada
+2025-06-23 15:45:00,Belo Horizonte,MG,Barreiro,-19.843159,-43.994384,2,4,user_1009,Alagamento moderado na via - Precipitação: 9.3mm,9.3,moderada
+2025-08-30 13:15:00,Cuiabá,MT,Goiabeiras,-15.553608,-56.029765,3,7,user_4273,Água até o joelho - Precipitação: 27.1mm,27.1,forte

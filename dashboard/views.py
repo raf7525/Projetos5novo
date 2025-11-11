@@ -21,7 +21,7 @@ def dashboard_home(request):
     """Dashboard principal com métricas e visualizações"""
     
     # Filtros da request
-    periodo = request.GET.get('periodo', '7')  # Default 7 dias
+    periodo = request.GET.get('periodo', '30')  # Default 30 dias para mostrar dados INMET
     bairro_filtro = request.GET.get('bairro', 'all')
     severidade_filtro = request.GET.get('severidade', 'all')
     
@@ -157,6 +157,49 @@ def dashboard_home(request):
     }
     
     return render(request, 'dashboard/home.html', context)
+
+def teste_dados(request):
+    """Página de teste para verificar se os dados estão sendo exibidos"""
+    
+    # Reusar a mesma lógica da dashboard_home
+    periodo = '30'
+    data_limite = timezone.now() - timedelta(days=int(periodo))
+    
+    relatos_query = RelatorioAlagamento.objects.filter(
+        timestamp__gte=data_limite,
+        status='ativo'
+    )
+    
+    metricas = {
+        'total_relatos': relatos_query.count(),
+        'relatos_criticos': relatos_query.filter(nivel_severidade=4).count(),
+        'relatos_altos': relatos_query.filter(nivel_severidade=3).count(),
+        'relatos_moderados': relatos_query.filter(nivel_severidade=2).count(),
+        'relatos_baixos': relatos_query.filter(nivel_severidade=1).count(),
+        'usuarios_ativos': UsuarioApp.objects.filter(
+            relatos__timestamp__gte=data_limite
+        ).distinct().count(),
+        'total_confirmacoes': sum(r.total_confirmacoes for r in relatos_query),
+        'severidade_media': relatos_query.aggregate(
+            media=Avg('nivel_severidade')
+        )['media'] or 0,
+    }
+    
+    relatos_recentes = relatos_query.select_related(
+        'bairro', 'usuario'
+    ).order_by('-timestamp')[:10]
+    
+    opcoes_filtros = {
+        'bairros': Bairro.objects.all().order_by('nome'),
+    }
+    
+    context = {
+        'metricas': metricas,
+        'relatos_recentes': relatos_recentes,
+        'opcoes_filtros': opcoes_filtros,
+    }
+    
+    return render(request, 'dashboard/teste.html', context)
 
 def api_dados_tempo_real(request):
     """API para dados em tempo real (AJAX)"""

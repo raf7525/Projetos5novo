@@ -3,7 +3,7 @@ from .base import *
 # Development specific settings
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
 
 # Database for development
 DATABASES = {

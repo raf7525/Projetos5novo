@@ -1,0 +1,80 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Teste de Dados - Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-white">🧪 TESTE DE DADOS INMET</h1>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2>📊 Métricas Testadas</h2>
+                    
+                    <ul>
+                        <li><strong>Total de Relatórios:</strong> {{ metricas.total_relatos }}</li>
+                        <li><strong>Casos Críticos:</strong> {{ metricas.relatos_criticos }}</li>
+                        <li><strong>Casos Moderados:</strong> {{ metricas.relatos_moderados }}</li>
+                        <li><strong>Casos Baixos:</strong> {{ metricas.relatos_baixos }}</li>
+                        <li><strong>Usuários Ativos:</strong> {{ metricas.usuarios_ativos }}</li>
+                        <li><strong>Total Confirmações:</strong> {{ metricas.total_confirmacoes }}</li>
+                        <li><strong>Severidade Média:</strong> {{ metricas.severidade_media|floatformat:2 }}</li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h3>📋 Últimos Relatórios</h3>
+                    {% if relatos_recentes %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Bairro</th>
+                                    <th>Cidade</th>
+                                    <th>Severidade</th>
+                                    <th>Confirmações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for relato in relatos_recentes %}
+                                <tr>
+                                    <td>{{ relato.timestamp|date:"d/m/Y H:i" }}</td>
+                                    <td>{{ relato.bairro.nome }}</td>
+                                    <td>{{ relato.bairro.cidade }}</td>
+                                    <td>
+                                        {% if relato.nivel_severidade == 1 %}🟢 Baixo{% endif %}
+                                        {% if relato.nivel_severidade == 2 %}🟡 Moderado{% endif %}
+                                        {% if relato.nivel_severidade == 3 %}🟠 Alto{% endif %}
+                                        {% if relato.nivel_severidade == 4 %}🔴 Crítico{% endif %}
+                                    </td>
+                                    <td>{{ relato.total_confirmacoes }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p class="text-danger">❌ Nenhum relatório encontrado!</p>
+                    {% endif %}
+                    
+                    <hr>
+                    
+                    <h3>🏘️ Bairros Disponíveis</h3>
+                    {% if opcoes_filtros.bairros %}
+                        <div class="row">
+                            {% for bairro in opcoes_filtros.bairros %}
+                            <div class="col-md-3 mb-2">
+                                <span class="badge bg-primary">{{ bairro.nome }}, {{ bairro.cidade }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-warning">⚠️ Nenhum bairro encontrado!</p>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

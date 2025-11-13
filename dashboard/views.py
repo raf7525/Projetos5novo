@@ -21,7 +21,7 @@ def dashboard_home(request):
     """Dashboard principal com métricas e visualizações"""
     
     # Filtros da request
-    periodo = request.GET.get('periodo', '30')  # Default 30 dias para mostrar dados INMET
+    periodo = request.GET.get('periodo', '90')  # Default 90 dias para mostrar dados INMET
     bairro_filtro = request.GET.get('bairro', 'all')
     severidade_filtro = request.GET.get('severidade', 'all')
     

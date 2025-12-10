@@ -5,7 +5,8 @@ Views do Dashboard - Sistema Waze de Alagamentos
 Views para dashboard interativo com visualizações e filtros
 """
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.db.models import Count, Avg, Q, F
 from django.utils import timezone
@@ -16,6 +17,34 @@ from .models import (
     RelatorioAlagamento, Bairro, UsuarioApp, 
     InteracaoRelatorio, AlertaArea
 )
+from .forms import RelatorioAlagamentoForm
+
+@login_required
+def criar_relatorio(request):
+    """View para criar um novo relatório de alagamento."""
+    if request.method == 'POST':
+        form = RelatorioAlagamentoForm(request.POST, request.FILES)
+        if form.is_valid():
+            relatorio = form.save(commit=False)
+            
+            # Garante que existe um perfil de usuário da aplicação
+            usuario_app, created = UsuarioApp.objects.get_or_create(usuario=request.user)
+            relatorio.usuario = usuario_app
+            
+            relatorio.save()
+            
+            # Adicionar uma mensagem de sucesso (opcional, mas recomendado)
+            # messages.success(request, 'Relatório de alagamento enviado com sucesso!')
+            
+            return redirect('dashboard:home')
+    else:
+        form = RelatorioAlagamentoForm()
+        
+    context = {
+        'form': form,
+        'titulo': 'Reportar Novo Alagamento'
+    }
+    return render(request, 'dashboard/criar_relatorio.html', context)
 
 def dashboard_home(request):
     """Dashboard principal com métricas e visualizações"""
@@ -62,6 +91,9 @@ def dashboard_home(request):
     agora = timezone.now()
     ultima_24h = agora - timedelta(hours=24)
     
+    print("\n--- DEBUG: Calculando relatórios por hora ---")
+    print(f"Hora atual: {agora}")
+    
     relatos_por_hora = []
     for i in range(24):
         hora_inicio = ultima_24h + timedelta(hours=i)
@@ -72,10 +104,15 @@ def dashboard_home(request):
             status='ativo'
         ).count()
         
+        # Imprimir apenas se o contador for maior que zero para evitar poluir o console
+        if count > 0:
+            print(f"[{i:02d}] Intervalo: {hora_inicio.strftime('%Y-%m-%d %H:%M')} a {hora_fim.strftime('%Y-%m-%d %H:%M')} | Relatórios: {count}")
+
         relatos_por_hora.append({
             'hora': hora_inicio.strftime('%H:00'),
             'total': count
         })
+    print("--- FIM DEBUG ---\n")
     
     # 2. Ranking de bairros mais afetados
     bairros_ranking = relatos_query.values(
@@ -309,7 +346,7 @@ def mapa_interativo(request):
     
     context = {
         'dados_mapa': json.dumps(dados_mapa),
-        'stats_bairros': stats_bairros,
+        'stats_bairros': json.dumps(list(stats_bairros)),
         'filtros': {
             'severidade_min': severidade_min,
             'periodo_horas': periodo_horas,

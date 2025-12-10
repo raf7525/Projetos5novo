@@ -1,0 +1,104 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}{{ titulo }} - Sistema Waze Alagamentos{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">{{ titulo }}</h4>
+            </div>
+            <div class="card-body">
+                <p class="card-text text-muted">
+                    Preencha as informações abaixo para ajudar a comunidade a entender a situação do alagamento.
+                </p>
+                <hr>
+                
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.latitude.label }}</label>
+                        {{ form.latitude }}
+                        <div class="form-text">{{ form.latitude.help_text }}</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.longitude.label }}</label>
+                        {{ form.longitude }}
+                        <div class="form-text">{{ form.longitude.help_text }}</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.bairro.label }}</label>
+                        {{ form.bairro }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.endereco_aproximado.label }}</label>
+                        {{ form.endereco_aproximado }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.nivel_severidade.label }}</label>
+                        {{ form.nivel_severidade }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.altura_agua_cm.label }}</label>
+                        {{ form.altura_agua_cm }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.descricao.label }}</label>
+                        {{ form.descricao }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">{{ form.foto.label }}</label>
+                        {{ form.foto }}
+                    </div>
+                    
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-paper-plane"></i> Enviar Relatório
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+// Simples funcionalidade para obter localização atual
+document.addEventListener('DOMContentLoaded', function() {
+    const latField = document.getElementById('id_latitude');
+    const lonField = document.getElementById('id_longitude');
+
+    if (navigator.geolocation) {
+        // Criar um botão para buscar localização
+        const btn = document.createElement('button');
+        btn.textContent = 'Pegar minha localização atual';
+        btn.className = 'btn btn-secondary btn-sm mt-2';
+        btn.type = 'button';
+        
+        // Inserir o botão após o campo de latitude
+        latField.parentNode.insertBefore(btn, latField.nextSibling.nextSibling.nextSibling);
+
+        btn.addEventListener('click', () => {
+            navigator.geolocation.getCurrentPosition(position => {
+                latField.value = position.coords.latitude.toFixed(7);
+                lonField.value = position.coords.longitude.toFixed(7);
+            }, error => {
+                console.error("Erro ao obter localização: ", error);
+                alert("Não foi possível obter sua localização.");
+            });
+        });
+    }
+});
+</script>
+{% endblock %}
+{% endblock %}

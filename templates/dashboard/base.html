@@ -95,7 +95,10 @@
                 <strong>Recife Flood Monitor</strong>
             </a>
             
-            <div class="navbar-nav ms-auto">
+            <div class="navbar-nav ms-auto d-flex align-items-center">
+                <a class="btn btn-primary ms-2" href="{% url 'dashboard:criar_relatorio' %}">
+                    <i class="fas fa-plus-circle"></i> Reportar Alagamento
+                </a>
                 <a class="nav-link" href="{% url 'dashboard:home' %}">
                     <i class="fas fa-chart-line"></i> Dashboard
                 </a>

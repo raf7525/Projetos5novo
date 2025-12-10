@@ -1,0 +1,137 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Gráfico de Bairros Mais Afetados - Sistema Waze Alagamentos{% endblock %}
+
+{% block extra_css %}
+<style>
+    .chart-container {
+        position: relative;
+        height: 80vh; /* Altura responsiva */
+        width: 100%;
+    }
+    .filter-form {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <h2 class="mb-3">
+            <i class="fas fa-chart-bar text-primary"></i> Bairros Mais Afetados
+            {% if total_relatos is not None %}
+                <span class="badge bg-secondary ms-2">{{ total_relatos }} Relatos no Período</span>
+            {% endif %}
+        </h2>
+        <p class="lead">Visualize o ranking de bairros com maior número de relatórios de alagamento.</p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Seção de Filtros -->
+    <div class="col-lg-3 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-filter"></i> Filtrar Gráfico</h5>
+            </div>
+            <div class="card-body filter-form">
+                <form method="GET" id="chart-filter-form">
+                    <div class="mb-3">
+                        <label for="severidade_min" class="form-label">Severidade Mínima:</label>
+                        <select name="sev_min" id="severidade_min" class="form-select">
+                            <option value="1" {% if filtros.severidade_min == "1" %}selected{% endif %}>1 - Baixa</option>
+                            <option value="2" {% if filtros.severidade_min == "2" %}selected{% endif %}>2 - Moderada</option>
+                            <option value="3" {% if filtros.severidade_min == "3" %}selected{% endif %}>3 - Alta</option>
+                            <option value="4" {% if filtros.severidade_min == "4" %}selected{% endif %}>4 - Crítica</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="periodo_horas" class="form-label">Período (horas):</label>
+                        <select name="periodo" id="periodo_horas" class="form-select">
+                            <option value="6" {% if filtros.periodo_horas == "6" %}selected{% endif %}>Últimas 6 horas</option>
+                            <option value="12" {% if filtros.periodo_horas == "12" %}selected{% endif %}>Últimas 12 horas</option>
+                            <option value="24" {% if filtros.periodo_horas == "24" %}selected{% endif %}>Últimas 24 horas</option>
+                            <option value="48" {% if filtros.periodo_horas == "48" %}selected{% endif %}>Últimas 48 horas</option>
+                            <option value="72" {% if filtros.periodo_horas == "72" %}selected{% endif %}>Últimas 72 horas</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Aplicar Filtros</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção do Gráfico -->
+    <div class="col-lg-9 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Ranking de Relatórios por Bairro</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="bairrosChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Os dados de 'stats_bairros' vêm como uma string JSON do Django
+        const statsBairrosRaw = '{{ stats_bairros|safe }}';
+        const statsBairros = JSON.parse(statsBairrosRaw);
+
+        // Preparar os dados para o Chart.js
+        // Ordenar os bairros para o gráfico de barras horizontal
+        const sortedBairros = statsBairros.sort((a, b) => a.total - b.total);
+        
+        const labels = sortedBairros.map(item => item.bairro__nome);
+        const data = sortedBairros.map(item => item.total);
+
+        const ctx = document.getElementById('bairrosChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar', // Gráfico de barras
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Número de Relatórios',
+                    data: data,
+                    backgroundColor: 'rgba(52, 152, 219, 0.7)',
+                    borderColor: 'rgba(52, 152, 219, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y', // Torna o gráfico de barras horizontal
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false // Oculta a legenda, pois o título do dataset é suficiente
+                    },
+                    title: {
+                        display: true,
+                        text: 'Número de Relatórios de Alagamento por Bairro'
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Quantidade de Relatórios'
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

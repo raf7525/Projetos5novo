@@ -13,4 +13,5 @@ urlpatterns = [
     path('analytics/', views.analytics, name='analytics'),
     path('relatorio/<int:relato_id>/', views.relatorio_detalhado, name='relatorio_detalhes'),
     path('api/tempo-real/', views.api_dados_tempo_real, name='api_tempo_real'),
+    path('relatar/', views.criar_relatorio, name='criar_relatorio'),
 ]

@@ -9,6 +9,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.db.models import Count, Avg, Q, F
+from django.db.models.functions import ExtractMonth, ExtractHour
 from django.utils import timezone
 from datetime import datetime, timedelta
 import json
@@ -365,8 +366,8 @@ def analytics(request):
     # Tendências por mês
     tendencias_mensais = RelatorioAlagamento.objects.filter(
         timestamp__gte=ultimos_90_dias
-    ).extra(
-        select={'mes': 'EXTRACT(month FROM timestamp)'}
+    ).annotate(
+        mes=ExtractMonth('timestamp')
     ).values('mes').annotate(
         total=Count('id'),
         severidade_media=Avg('nivel_severidade')
@@ -375,8 +376,8 @@ def analytics(request):
     # Padrões por hora do dia
     padroes_horarios = RelatorioAlagamento.objects.filter(
         timestamp__gte=ultimos_90_dias
-    ).extra(
-        select={'hora': 'EXTRACT(hour FROM timestamp)'}
+    ).annotate(
+        hora=ExtractHour('timestamp')
     ).values('hora').annotate(
         total=Count('id')
     ).order_by('hora')

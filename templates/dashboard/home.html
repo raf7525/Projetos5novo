@@ -125,41 +125,6 @@
 
 <!-- Gráficos e Visualizações -->
 <div class="row mb-4">
-    <!-- Gráfico de Relatórios por Hora -->
-    <div class="col-lg-8 mb-4">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">
-                    <i class="fas fa-clock text-primary"></i>
-                    Relatórios por Hora (Últimas 24h)
-                </h5>
-            </div>
-            <div class="card-body">
-                <div class="chart-container">
-                    <canvas id="chartRelatoriosPorHora"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Distribuição de Severidade -->
-    <div class="col-lg-4 mb-4">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">
-                    <i class="fas fa-pie-chart text-primary"></i>
-                    Distribuição por Severidade
-                </h5>
-            </div>
-            <div class="card-body">
-                <div class="chart-container">
-                    <canvas id="chartSeveridade"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="row mb-4">
     <!-- Ranking de Bairros -->
     <div class="col-lg-6 mb-4">
@@ -258,37 +223,6 @@
     const relatosPorHora = {{ relatos_por_hora|safe }};
     const severidadeDistribuicao = {{ severidade_distribuicao|safe }};
     const dadosMapa = {{ dados_mapa|safe }};
-    
-    // Gráfico de Relatórios por Hora
-    const ctxHora = document.getElementById('chartRelatoriosPorHora').getContext('2d');
-    new Chart(ctxHora, {
-        type: 'line',
-        data: {
-            labels: relatosPorHora.map(item => item.hora),
-            datasets: [{
-                label: 'Relatórios',
-                data: relatosPorHora.map(item => item.total),
-                borderColor: '#3498db',
-                backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                tension: 0.1,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
     
     // Gráfico de Distribuição de Severidade
     const ctxSeveridade = document.getElementById('chartSeveridade').getContext('2d');

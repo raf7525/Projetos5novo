@@ -1,0 +1,246 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Analytics - Sistema Waze Alagamentos{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-chart-line text-primary"></i> Analytics Avançados</h2>
+        <span class="badge bg-info text-dark">Últimos {{ periodo_analise }} dias</span>
+    </div>
+
+    <div class="row">
+        <!-- Tendências Mensais -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">Tendências Mensais</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="chartTendencias"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Padrões Horários -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">Padrões por Hora do Dia</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="chartHorarios"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Correlação Severidade vs Confirmações -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">Correlação: Severidade x Confirmações</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="chartCorrelacao"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Usuários -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">Top Contribuidores</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Usuário</th>
+                                    <th>Relatos no Período</th>
+                                    <th>Confiabilidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for usuario in top_usuarios %}
+                                <tr>
+                                    <td>{{ usuario.nome_exibicao }}</td>
+                                    <td><span class="badge bg-primary">{{ usuario.relatos_periodo }}</span></td>
+                                    <td>
+                                        <div class="progress" style="height: 20px;">
+                                            <div class="progress-bar bg-success" role="progressbar" 
+                                                 style="width: {% widthratio usuario.nivel_confiabilidade 1 100 %}%;" 
+                                                 aria-valuenow="{% widthratio usuario.nivel_confiabilidade 1 100 %}" 
+                                                 aria-valuemin="0" aria-valuemax="100">
+                                                {% widthratio usuario.nivel_confiabilidade 1 100 %}%
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted">Nenhum dado disponível</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Dados passados pelo Django
+    const tendenciasData = [
+        {% for item in tendencias_mensais %}
+            { mes: {{ item.mes }}, total: {{ item.total }}, severidade: {{ item.severidade_media|stringformat:".2f" }} },
+        {% endfor %}
+    ];
+
+    const horariosData = [
+        {% for item in padroes_horarios %}
+            { hora: {{ item.hora }}, total: {{ item.total }} },
+        {% endfor %}
+    ];
+
+    const correlacaoRaw = {{ correlacao_dados|safe }};
+
+    // Configuração dos Gráficos
+    
+    // 1. Tendências Mensais
+    const ctxTendencias = document.getElementById('chartTendencias').getContext('2d');
+    new Chart(ctxTendencias, {
+        type: 'line',
+        data: {
+            labels: tendenciasData.map(d => `Mês ${d.mes}`),
+            datasets: [{
+                label: 'Total de Relatos',
+                data: tendenciasData.map(d => d.total),
+                borderColor: '#3498db',
+                tension: 0.1,
+                yAxisID: 'y'
+            }, {
+                label: 'Severidade Média',
+                data: tendenciasData.map(d => d.severidade),
+                borderColor: '#e74c3c',
+                borderDash: [5, 5],
+                tension: 0.1,
+                yAxisID: 'y1'
+            }]
+        },
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            scales: {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: {
+                        drawOnChartArea: false,
+                    },
+                    min: 1,
+                    max: 4
+                },
+            }
+        }
+    });
+
+    // 2. Padrões Horários
+    const ctxHorarios = document.getElementById('chartHorarios').getContext('2d');
+    // Preencher horas faltantes com 0
+    const horasCompletas = Array.from({length: 24}, (_, i) => {
+        const found = horariosData.find(d => d.hora === i);
+        return found ? found.total : 0;
+    });
+
+    new Chart(ctxHorarios, {
+        type: 'bar',
+        data: {
+            labels: Array.from({length: 24}, (_, i) => `${i}h`),
+            datasets: [{
+                label: 'Ocorrências',
+                data: horasCompletas,
+                backgroundColor: 'rgba(52, 152, 219, 0.6)',
+                borderColor: 'rgba(52, 152, 219, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // 3. Correlação (Scatter)
+    const ctxCorrelacao = document.getElementById('chartCorrelacao').getContext('2d');
+    
+    // Adicionar um pouco de "jitter" (ruído) para visualizar pontos sobrepostos
+    const scatterData = correlacaoRaw.map(item => ({
+        x: item.nivel_severidade + (Math.random() - 0.5) * 0.2,
+        y: item.total_confirmacoes + (Math.random() - 0.5) * 0.2
+    }));
+
+    new Chart(ctxCorrelacao, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Relatos',
+                data: scatterData,
+                backgroundColor: 'rgba(231, 76, 60, 0.5)'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Nível de Severidade (1-4)'
+                    },
+                    min: 0.5,
+                    max: 4.5,
+                    ticks: {
+                        stepSize: 1
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Confirmações'
+                    },
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `Severidade: ${Math.round(context.raw.x)}, Confirmações: ${Math.round(context.raw.y)}`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

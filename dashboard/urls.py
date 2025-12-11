@@ -9,6 +9,7 @@ app_name = 'dashboard'
 urlpatterns = [
     path('', views.dashboard_home, name='home'),
     path('teste/', views.teste_dados, name='teste'),
+    path('teste-ml/', views.teste_ml, name='teste_ml'),
     path('mapa/', views.mapa_interativo, name='mapa'),
     path('analytics/', views.analytics, name='analytics'),
     path('relatorio/<int:relato_id>/', views.relatorio_detalhado, name='relatorio_detalhes'),

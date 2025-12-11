@@ -1,0 +1,95 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">🤖 Teste de Classificação de Severidade (ML)</h4>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">
+                        Este formulário utiliza o modelo de Machine Learning treinado (Random Forest) 
+                        para prever a severidade de um alagamento com base nos dados informados.
+                    </p>
+
+                    {% if resultado %}
+                        {% if resultado.erro %}
+                            <div class="alert alert-danger">
+                                ❌ Erro: {{ resultado.erro }}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-success text-center">
+                                <h5>Resultado da Predição:</h5>
+                                <h2 class="display-4">{{ resultado.nivel }}</h2>
+                                <p class="lead">{{ resultado.descricao }}</p>
+                                <hr>
+                                <small class="text-muted">
+                                    Baseado em: {{ resultado.inputs.bairro }} | 
+                                    {{ resultado.inputs.confirmacoes }} confirmações
+                                </small>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="bairro" class="form-label">Bairro</label>
+                            <select name="bairro" id="bairro" class="form-select" required>
+                                <option value="">Selecione um bairro...</option>
+                                {% for bairro in bairros %}
+                                    <option value="{{ bairro.nome }}" data-lat="{{ bairro.latitude }}" data-lon="{{ bairro.longitude }}">
+                                        {{ bairro.nome }}
+                                    </option>
+                                {% endfor %}
+                                <option value="Outro">Outro (Inserir Manualmente)</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="latitude" class="form-label">Latitude</label>
+                                <input type="number" step="any" name="latitude" id="latitude" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="longitude" class="form-label">Longitude</label>
+                                <input type="number" step="any" name="longitude" id="longitude" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle"></i> 
+                                O número de confirmações será recuperado automaticamente do último relato registrado neste bairro.
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                🔮 Prever Severidade
+                            </button>
+                            <a href="{% url 'dashboard:home' %}" class="btn btn-outline-secondary">Voltar ao Dashboard</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('bairro').addEventListener('change', function() {
+        var option = this.options[this.selectedIndex];
+        var lat = option.getAttribute('data-lat');
+        var lon = option.getAttribute('data-lon');
+        
+        if(lat && lon) {
+            document.getElementById('latitude').value = lat.replace(',', '.');
+            document.getElementById('longitude').value = lon.replace(',', '.');
+        }
+    });
+</script>
+{% endblock %}

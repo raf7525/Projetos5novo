@@ -24,13 +24,15 @@ from sklearn.metrics import (
 )
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.pipeline import Pipeline
+import joblib
+import os
 import warnings
 warnings.filterwarnings('ignore')
 
 class FloodSeverityClassifier:
     """Classificador de severidade de alagamentos com análise completa"""
     
-    def __init__(self, data_path):
+    def __init__(self, data_path=None):
         """Inicializa o classificador"""
         self.data_path = data_path
         self.df = None
@@ -44,7 +46,8 @@ class FloodSeverityClassifier:
         self.results = {}
         self.scaler = StandardScaler()
         
-        self.load_and_prepare_data()
+        if self.data_path:
+            self.load_and_prepare_data()
     
     def load_and_prepare_data(self):
         """Carrega e prepara os dados para ML"""
@@ -61,8 +64,8 @@ class FloodSeverityClassifier:
         self.df['eh_fim_semana'] = (self.df['dia_semana'] >= 5).astype(int)
         
         # Encoding de bairros
-        le_bairro = LabelEncoder()
-        self.df['bairro_encoded'] = le_bairro.fit_transform(self.df['bairro'])
+        self.le_bairro = LabelEncoder()
+        self.df['bairro_encoded'] = self.le_bairro.fit_transform(self.df['bairro'])
         
         # Criar features derivadas
         self.df['confirmacoes_per_hour'] = self.df['confirmacoes'] / np.maximum((pd.Timestamp.now() - self.df['timestamp']).dt.total_seconds() / 3600, 1)
@@ -349,6 +352,96 @@ class FloodSeverityClassifier:
         else:
             return "Sistemas com balanço entre custos"
     
+    def save_model(self, output_dir='data/models'):
+        """Salva o melhor modelo e artefatos"""
+        os.makedirs(output_dir, exist_ok=True)
+        
+        # Identificar melhor modelo (assumindo que run_complete_analysis já rodou)
+        # Se não, usa o Random Forest por padrão
+        model_name = "Random Forest"
+        model = self.models.get(model_name)
+        
+        if not model:
+            print("❌ Modelo não encontrado para salvar.")
+            return
+            
+        # Salvar artefatos
+        try:
+            joblib.dump(model, os.path.join(output_dir, 'flood_model.pkl'))
+            joblib.dump(self.scaler, os.path.join(output_dir, 'scaler.pkl'))
+            joblib.dump(self.le_bairro, os.path.join(output_dir, 'le_bairro.pkl'))
+            print(f"💾 Modelo e artefatos salvos em '{output_dir}'")
+        except Exception as e:
+            print(f"❌ Erro ao salvar modelo: {e}")
+
+    def load_model(self, model_dir='data/models'):
+        """Carrega o modelo e artefatos salvos"""
+        try:
+            self.loaded_model = joblib.load(os.path.join(model_dir, 'flood_model.pkl'))
+            self.scaler = joblib.load(os.path.join(model_dir, 'scaler.pkl'))
+            self.le_bairro = joblib.load(os.path.join(model_dir, 'le_bairro.pkl'))
+            print(f"✅ Modelo carregado de '{model_dir}'")
+            return True
+        except Exception as e:
+            print(f"❌ Erro ao carregar modelo: {e}")
+            return False
+
+    def predict_severity(self, data_dict):
+        """
+        Prevê severidade para um novo dado
+        data_dict: dicionário com chaves:
+            - latitude, longitude
+            - timestamp (datetime)
+            - confirmacoes (int)
+            - bairro (str)
+        """
+        if not hasattr(self, 'loaded_model'):
+            print("❌ Modelo não carregado. Chame load_model() primeiro.")
+            return None
+            
+        try:
+            # Preparar features
+            ts = pd.to_datetime(data_dict['timestamp'])
+            hora = ts.hour
+            dia_semana = ts.weekday()
+            mes = ts.month
+            eh_fim_semana = 1 if dia_semana >= 5 else 0
+            
+            # Tratar bairro desconhecido
+            try:
+                bairro_encoded = self.le_bairro.transform([data_dict['bairro']])[0]
+            except:
+                # Se bairro desconhecido, usar moda ou valor padrão (0)
+                bairro_encoded = 0
+                
+            lat_abs = abs(data_dict['latitude'])
+            lon_abs = abs(data_dict['longitude'])
+            
+            # Montar vetor de features na ordem correta
+            features = np.array([[
+                data_dict['latitude'], 
+                data_dict['longitude'], 
+                hora, 
+                dia_semana, 
+                mes, 
+                data_dict['confirmacoes'], 
+                eh_fim_semana, 
+                bairro_encoded,
+                lat_abs, 
+                lon_abs
+            ]])
+            
+            # Escalar
+            features_scaled = self.scaler.transform(features)
+            
+            # Prever
+            prediction = self.loaded_model.predict(features_scaled)[0]
+            return int(prediction)
+            
+        except Exception as e:
+            print(f"❌ Erro na predição: {e}")
+            return None
+
     def feature_importance_analysis(self):
         """Análise de importância das features"""
         print("\n" + "="*80)

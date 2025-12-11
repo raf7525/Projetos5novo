@@ -403,3 +403,52 @@ def analytics(request):
     }
     
     return render(request, 'dashboard/analytics.html', context)
+
+from .ml_predictor import predict_flood_severity
+
+def teste_ml(request):
+    """View para testar o modelo de ML"""
+    resultado = None
+    bairros = Bairro.objects.all().order_by('nome')
+    
+    if request.method == 'POST':
+        try:
+            lat = float(request.POST.get('latitude'))
+            lon = float(request.POST.get('longitude'))
+            bairro_nome = request.POST.get('bairro')
+            
+            # Busca confirmações do banco (último relato do bairro)
+            confirmacoes = 1
+            if bairro_nome and bairro_nome != 'Outro':
+                ultimo_relato = RelatorioAlagamento.objects.filter(
+                    bairro__nome=bairro_nome
+                ).order_by('-timestamp').first()
+                
+                if ultimo_relato:
+                    confirmacoes = ultimo_relato.total_confirmacoes
+            
+            timestamp = timezone.now() # Usa hora atual para teste
+            
+            nivel = predict_flood_severity(lat, lon, timestamp, confirmacoes, bairro_nome)
+            
+            severidade_map = {
+                1: "🟢 Baixo - Poças d'água",
+                2: "🟡 Moderado - Alagamento leve",
+                3: "🟠 Alto - Alagamento significativo",
+                4: "🔴 Crítico - Alagamento severo"
+            }
+            
+            resultado = {
+                'nivel': nivel,
+                'descricao': severidade_map.get(nivel, "Desconhecido"),
+                'inputs': {
+                    'lat': lat,
+                    'lon': lon,
+                    'bairro': bairro_nome,
+                    'confirmacoes': confirmacoes
+                }
+            }
+        except Exception as e:
+            resultado = {'erro': str(e)}
+            
+    return render(request, 'dashboard/teste_ml.html', {'resultado': resultado, 'bairros': bairros})
